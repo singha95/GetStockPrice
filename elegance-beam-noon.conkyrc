@@ -51,5 +51,8 @@ swap ${alignr}${swap} / ${swapmax}
 system  ${alignr}${fs_used_perc /}% / ${fs_size /}
 data  ${alignr}${fs_used_perc /run/media/angad/DATA/}% / ${fs_size /run/media/angad/DATA/}
 ${voffset 30}${font Raleway:pixelsize=18}${color3}Linux  ${kernel}${color}
-${font}${color}${exec /home/angad/scripts/parse_webpage/parse_prices googl amzn td aapl}
+${font}${color}AMZN${alignr}${exec ./GetStockPrice/parse_prices -p amzn}
+${font}${color}GOOGL${alignr}${exec .GetStockPrice/parse_prices -p googl}
+${font}${color}TD${alignr}${exec ./GetStockPrice/parse_prices -p td}
+${font}${color}AAPL${alignr}${exec ./GetStockPrice/parse_prices -p AAPL}
 ]];

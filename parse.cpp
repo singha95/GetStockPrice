@@ -20,6 +20,18 @@ void print_price(char* code, std::string price )
     std::cout << std::left << code << std::right << price << std::endl;
 }
 
+int check_params(int argc, char** argv){ 
+    for (int i = 0; i < argc; ++i )
+    { 
+        bool isEqual = strcmp(argv[i], "-p") == 0; 
+        if (isEqual)
+        { 
+            return 1; 
+        }
+    }
+    return 0; 
+}
+
 std::string get_price(CURL *curl, const char *url)
 {   
     CURLcode res;
@@ -52,6 +64,7 @@ std::string get_price(CURL *curl, const char *url)
 
 int main(int argc, char** argv) 
 { 
+    int isPrices = check_params(argc, argv); 
     CURL *curl;
     curl_global_init(CURL_GLOBAL_DEFAULT);
  
@@ -59,10 +72,16 @@ int main(int argc, char** argv)
     char str[100];
     const char *param; 
     if(curl) {
-      for (int i = 1 ; i < argc ; ++i){ 
+      for (int i = 1; i < argc ; ++i){ 
           strcpy(str, "https://ca.finance.yahoo.com/quote/"); 
           strcat(str, argv[i]);
-          print_price(argv[i], get_price(curl, str)); 
+          if (!isPrices){
+            print_price(argv[i], get_price(curl, str));
+          }
+          else if (strcmp(argv[i], "-p")) 
+          {
+            std::cout << get_price(curl, str) << std::endl; 
+          }
           curl = curl_easy_init();
           
       }
