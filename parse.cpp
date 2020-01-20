@@ -85,7 +85,9 @@ int main(int argc, char** argv)
           curl = curl_easy_init();
           
       }
+      
     } 
+    curl_easy_cleanup(curl);
     curl_global_cleanup();
     return 0; 
  }
