@@ -14,6 +14,16 @@ size_t write_to_string(void *ptr, size_t size, size_t nmemb, std::string stream)
   return realsize;
 }
 
+void print_usage()
+{ 
+  std::cout << "A program to get stock prices from Yahoo Fianance:" 
+            << std::endl 
+            << "-p \t\t Print only the prices of the given stocks"
+            << std::endl
+            << "Example Usage: price -p googl"  
+            <<std::endl ; 
+}
+
 void print_price(char* code, std::string price )
 { 
     std::cout.width(25 - price.length()) ; 
@@ -64,6 +74,12 @@ std::string get_price(CURL *curl, const char *url)
 
 int main(int argc, char** argv) 
 { 
+
+    if (argc < 2 ){ 
+      print_usage(); 
+      return 0 ;
+    }
+
     int isPrices = check_params(argc, argv); 
     CURL *curl;
     curl_global_init(CURL_GLOBAL_DEFAULT);
