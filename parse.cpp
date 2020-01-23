@@ -44,6 +44,7 @@ int check_params(int argc, char** argv){
 
 std::string get_price(CURL *curl, const char *url)
 {   
+    curl = curl_easy_init();
     CURLcode res;
     std::string response; 
     curl_easy_setopt(curl, CURLOPT_URL, url);
@@ -82,9 +83,9 @@ int main(int argc, char** argv)
 
     int isPrices = check_params(argc, argv); 
     CURL *curl;
-    curl_global_init(CURL_GLOBAL_DEFAULT);
+    curl_global_init(0);
  
-    curl = curl_easy_init();
+    
     char str[100];
     const char *param; 
     if(curl) {
@@ -98,12 +99,11 @@ int main(int argc, char** argv)
           {
             std::cout << get_price(curl, str) << std::endl; 
           }
-          curl = curl_easy_init();
           
       }
       
     } 
-    curl_easy_cleanup(curl);
+    //curl_easy_cleanup(curl);
     curl_global_cleanup();
     return 0; 
  }
