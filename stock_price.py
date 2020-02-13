@@ -4,7 +4,16 @@ import yfinance as yf
 import matplotlib.pyplot as plt
 import datetime
 
-stocks = ['GOOGL', 'AAPL', 'TD', 'AMZN', 'V']
+def getPortfolio(filename): 
+    f = open(filename)
+    stocks = [] 
+    for l in f: 
+        stocks.append(l.split(",")[0])
+
+    return stocks 
+
+
+stocks = getPortfolio("/home/angad/scripts/GetStockPrice/portfolio.txt")
 savePath = "/home/angad/Pictures/stocks/"
 curDate = datetime.date.today().strftime('%Y-%m-%d')
 startDateMonth = (datetime.date.today() - datetime.timedelta(365/12)).strftime('%Y-%m-%d')

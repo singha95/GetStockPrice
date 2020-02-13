@@ -10,7 +10,7 @@ int main()
 {
     std::ifstream stocks;
     std::string x; 
-    stocks.open("portfolio.txt");
+    stocks.open("/home/angad/scripts/GetStockPrice/portfolio.txt");
     if (!stocks) {
         std::cout << "Unable to open file";
         exit(1); 
@@ -32,7 +32,7 @@ int main()
         if (cPrice < price){ 
             color = "red"; 
         }
-        std::cout << "${font}${color}" << x << "{color " << color << "}${alignr}" << cPrice << std::endl; 
+        std::cout << "${font}${color}" << symbol << "${color " << color << "}${alignr}" << cPrice << std::endl; 
     }
     
     curl_global_cleanup();
