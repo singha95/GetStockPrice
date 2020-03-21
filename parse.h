@@ -6,4 +6,4 @@ std::string filter_stock_html(std::string html) ;
 
 std::string get_stock_color(std::string html); 
 
-float get_price(CURL *curl, const char *url); 
+float get_price(std::string html); 

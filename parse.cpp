@@ -5,6 +5,7 @@
 #include <string.h>
 
 
+
 size_t write_to_string(void *ptr, size_t size, size_t nmemb, std::string stream)
 {
   size_t realsize = size * nmemb;
@@ -44,26 +45,28 @@ std::string filter_stock_html(std::string html){
 }
 
 std::string get_stock_color(std::string html){ 
+
   std::string s = "<span class=\"Trsdu(0.3s) Fw(b) Fz(36px) Mb(-4px) D(ib)\">1,480.39</span>";
-  std::regex rgx("<span class=\"Trsdu\\(0.3s\\) Fw\\(b\\) Fz\\(36px\\) Mb\\(-4px\\) D\\(ib\\)\" data-reactid=\"34\">([\\s\\S]*?)</span>");
+  std::regex rgx("Trsdu\\(0.3s\\) Fw\\(500\\) Pstart\\(10px\\) Fz\\(24px\\) C\\(\\$data(.*?)\\)");
   std::smatch matches;
   bool b = std::regex_search(html, matches, rgx);
   if (!b || matches[1] == "")
   { 
     return ""; 
   }
-  return "";
+  std::string temp(matches[1]); 
+  std::transform(temp.begin(), temp.end(), temp.begin(), ::tolower);
+  return temp;
   //<span class="Trsdu(0.3s) Fw(500) Pstart(10px) Fz(24px) C($dataGreen)" data-reactid="35">+8.57 (+0.57%)</span>
 }
 
-float get_price(CURL *curl, const char *url)
-{   
-    std::string response = filter_stock_html(get_html(curl, url));
-    std::cout << response << std::endl;  
-    std::string s = "<div class=\"D(ib) Va(m) Maw(65%) Ov(h)\" data-reactid=\"32\">1,480.39</div>";
+
+
+float get_price(std::string html)
+{     
     std::regex rgx("<span class=\"Trsdu\\(0.3s\\) Fw\\(b\\) Fz\\(36px\\) Mb\\(-4px\\) D\\(ib\\)\" data-reactid=\"34\">([\\s\\S]*?)</span>");
     std::smatch matches;
-    bool b = std::regex_search(response, matches, rgx);
+    bool b = std::regex_search(html, matches, rgx);
     if (!b || matches[1] == "")
     { 
       return 0; 

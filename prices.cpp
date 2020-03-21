@@ -44,31 +44,30 @@ int main(int argc, char** argv)
 { 
 
     if (argc < 2 ){ 
-      print_usage(); 
-      return 0 ;
+      print_usage();
+      return 0; 
     }
 
     int isPrices = check_params(argc, argv); 
     CURL *curl;
     curl_global_init(0);
  
-    
     char str[100];
-    if(curl) {
-      for (int i = 1; i < argc ; ++i){ 
-          strcpy(str, "https://ca.finance.yahoo.com/quote/"); 
-          strcat(str, argv[i]);
-          if (!isPrices){
-            print_price(argv[i], get_price(curl, str));
-          }
-          else if (strcmp(argv[i], "-p")) 
-          {
-            std::cout << get_price(curl, str) << std::endl; 
-          }
-          
-      }
-      
-    } 
+
+    for (int i = 1; i < argc ; ++i){ 
+        strcpy(str, "https://ca.finance.yahoo.com/quote/"); 
+        strcat(str, argv[i]);
+        std::string html = filter_stock_html(get_html(curl, str));
+        if (!isPrices){
+          print_price(argv[i], get_price(html));
+        }
+        else if (strcmp(argv[i], "-p")) 
+        {
+          std::cout << get_price(html) << std::endl; 
+        }
+        
+    }
+
     //curl_easy_cleanup(curl);
     curl_global_cleanup();
     return 0; 
