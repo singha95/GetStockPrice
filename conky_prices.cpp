@@ -4,7 +4,7 @@
 #include <string.h>
 #include <fstream>
 #include <curl/curl.h>
-#include "parse.hpp"
+#include "parse.h"
 
 int main()
 {

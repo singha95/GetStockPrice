@@ -1,10 +1,13 @@
 CC=g++
-conky_prices: conky_prices.cpp parse_prices parse.hpp
-	$(CC) conky_prices.cpp -o conky_prices -lcurl 
+conky_prices: conky_prices.o parse.o pugixml.o
+	$(CC) -o conky_prices_temp conky_prices.o parse.o pugixml.o -lcurl 
 
 
-parse_prices: parse.cpp parse.hpp
-	$(CC) parse.cpp -o parse_prices -lcurl  
+parse_prices: price.o pugixml.o
+	$(CC) -o parse_prices_temp price.o pugixml.o -lcurl  
+
+pugixml: 
+	$(CC) -o pugixml pugixml.cpp
 
 clean: 
-	rm -rf parse_prices 
+	rm -rf parse_prices *.o
