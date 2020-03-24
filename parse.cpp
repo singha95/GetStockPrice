@@ -64,7 +64,6 @@ std::string get_stock_color(std::string html){
   std::string temp(matches[1]); 
   std::transform(temp.begin(), temp.end(), temp.begin(), ::tolower);
   return temp;
-  //<span class="Trsdu(0.3s) Fw(500) Pstart(10px) Fz(24px) C($dataGreen)" data-reactid="35">+8.57 (+0.57%)</span>
 }
 
 

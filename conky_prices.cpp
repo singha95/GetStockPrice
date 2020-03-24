@@ -31,7 +31,7 @@ int main()
         if (percent < 0){ 
             color = "red"; 
         } 
-        std::cout << "${font}${color}" << symbol << "${color " << color << "}${alignr}" << price << "(" << percent << ")" << std::endl; 
+        std::cout << "${font}${color}" << symbol << "${color " << color << "}${alignr}" << price << " (" << percent << "%)" << std::endl; 
     }
     
     curl_global_cleanup();
