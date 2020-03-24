@@ -29,8 +29,12 @@ int main()
         url += symbol; 
         std::string response = filter_stock_html(get_html(curl, url.c_str()));
         float price =  get_price(response); 
-        std::string color = get_stock_color(response); 
-        std::cout << "${font}${color}" << symbol << "${color " << color << "}${alignr}" << price << std::endl; 
+        float percent = get_percent(response);
+        std::string color("green");
+        if (percent < 0){ 
+            color = "red"; 
+        } 
+        std::cout << "${font}${color}" << symbol << "${color " << color << "}${alignr}" << price << "(" << percent << ")" << std::endl; 
     }
     
     curl_global_cleanup();
