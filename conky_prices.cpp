@@ -19,10 +19,7 @@ int main()
     CURL *curl;
     curl_global_init(0);    
     while (stocks >> x) {
-        //${font}${color}AMZN${alignr}${exec /home/angad/scripts/GetStockPrice/parse_prices -p amzn}
-        //s.substr(0, s.find(delimiter))
         std::string symbol = x.substr(0, x.find(","));
-        //float price = std::stod(x.substr(x.find(",") + 1, x.size() - 1));
 
         //Argument for the color of price 
         std::string url("https://ca.finance.yahoo.com/quote/"); 

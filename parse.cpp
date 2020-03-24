@@ -1,5 +1,4 @@
 #include <curl/curl.h>
-#include "pugixml.hpp"
 #include <regex>
 #include <iostream>
 #include <string.h>
@@ -36,8 +35,6 @@ std::string get_html(CURL *curl, const char *url){
 }
 
 std::string filter_stock_html(std::string html){ 
-    pugi::xml_document doc;
-    //pugi::xml_parse_result result = doc.load_string(html);
     std::regex rgx("<div class=\"D\\(ib\\) Va\\(m\\) Maw\\(65%\\) Ov\\(h\\)\" data-reactid=\"32\">(.*?)</div>");
     std::smatch matches;
     bool b = std::regex_search(html, matches, rgx);
@@ -57,8 +54,6 @@ float get_percent(std::string html){
 }
 
 std::string get_stock_color(std::string html){ 
-
-  std::string s = "<span class=\"Trsdu(0.3s) Fw(b) Fz(36px) Mb(-4px) D(ib)\">1,480.39</span>";
   std::regex rgx("Trsdu\\(0.3s\\) Fw\\(500\\) Pstart\\(10px\\) Fz\\(24px\\) C\\(\\$data(.*?)\\)");
   std::smatch matches;
   bool b = std::regex_search(html, matches, rgx);
