@@ -58,7 +58,6 @@ int main(int argc, char** argv)
         strcpy(str, "https://ca.finance.yahoo.com/quote/"); 
         strcat(str, argv[i]);
         std::string html = filter_stock_html(get_html(curl, str));
-        std::cout << html << std::endl;
         if (!isPrices){
           print_price(argv[i], get_price(html));
         }
