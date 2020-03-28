@@ -35,14 +35,14 @@ std::string get_html(CURL *curl, const char *url){
 }
 
 std::string filter_stock_html(std::string html){ 
-    std::regex rgx("<div class=\"D\\(ib\\) Va\\(m\\) Maw\\(65%\\) Ov\\(h\\)\" data-reactid=\"32\">(.*?)</div>");
+    std::regex rgx("<div class=\"D\\(ib\\) Mend\\(20px\\)\" data-reactid=\"31\">(.*?)</div>");
     std::smatch matches;
     bool b = std::regex_search(html, matches, rgx);
     return matches[1]; 
 }
 
 float get_percent(std::string html){ 
-  std::regex rgx("<span class=\"Trsdu\\(0.3s\\) Fw\\(500\\) Pstart\\(10px\\) Fz\\(24px\\) C\\(\\$data.*?\\)\" data-reactid=\"35\">.*?\\((.*?)\\)</span>"); 
+  std::regex rgx("<span class=\"Trsdu\\(0.3s\\) Fw\\(500\\) Pstart\\(10px\\) Fz\\(24px\\) C\\(.*?\\)\" data-reactid=\"33\">.*?\\((.*?)\\)</span>"); 
   std::smatch matches; 
   bool b = std::regex_search(html, matches, rgx);
   if (!b || matches[1] == "")
@@ -70,7 +70,7 @@ std::string get_stock_color(std::string html){
 
 float get_price(std::string html)
 {     
-    std::regex rgx("<span class=\"Trsdu\\(0.3s\\) Fw\\(b\\) Fz\\(36px\\) Mb\\(-4px\\) D\\(ib\\)\" data-reactid=\"34\">([\\s\\S]*?)</span>");
+    std::regex rgx("<span class=\"Trsdu\\(0.3s\\) Fw\\(b\\) Fz\\(36px\\) Mb\\(-4px\\) D\\(ib\\)\" data-reactid=\"32\">([\\s\\S]*?)</span>");
     std::smatch matches;
     bool b = std::regex_search(html, matches, rgx);
     if (!b || matches[1] == "")
