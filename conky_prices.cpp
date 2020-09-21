@@ -6,19 +6,13 @@
 #include <curl/curl.h>
 #include "parse.h"
 
-int main()
+int main(int argc, char** argv)
 {
-    std::ifstream stocks;
-    std::string x; 
-    stocks.open("/home/angad/scripts/GetStockPrice/portfolio.txt");
-    if (!stocks) {
-        std::cout << "Unable to open file";
-        exit(1); 
-    }
-
     CURL *curl;
     curl_global_init(0);    
-    while (stocks >> x) {
+    // while (stocks >> x) {
+    for (int i = 1; i < argc ; ++i){ 
+        std::string x(argv[i]); 
         std::string symbol = x.substr(0, x.find(","));
 
         //Argument for the color of price 
@@ -35,6 +29,5 @@ int main()
     }
     
     curl_global_cleanup();
-    stocks.close(); 
     return 0 ;
 }

@@ -3,18 +3,20 @@
 import yfinance as yf  
 import matplotlib.pyplot as plt
 import datetime
-
-def getPortfolio(filename): 
-    f = open(filename)
-    stocks = [] 
-    for l in f: 
-        stocks.append(l.split(",")[0])
-
-    return stocks 
+import sys
+import os 
 
 
-stocks = getPortfolio("/home/angad/scripts/GetStockPrice/portfolio.txt")
-savePath = "/home/angad/Pictures/stocks/"
+if not sys.argv[1:]: 
+    print("Add stock names to generate graphs for")
+    exit(1)
+
+stocks = [ x.upper() for x in sys.argv[1:] ]
+savePath = "./stocks/"
+if not os.path.exists(savePath):
+    os.makedirs(savePath)
+    os.makedirs(savePath + 'month')
+    os.makedirs(savePath + 'week')
 curDate = datetime.date.today().strftime('%Y-%m-%d')
 startDateMonth = (datetime.date.today() - datetime.timedelta(365/12)).strftime('%Y-%m-%d')
 startDateWeek = (datetime.date.today() - datetime.timedelta(365/50)).strftime('%Y-%m-%d')
